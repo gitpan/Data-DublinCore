@@ -1,0 +1,425 @@
+=head1 NAME
+
+Data::DublinCore - DublinCore meta-data access
+
+=head1 INHERITANCE
+
+ Data::DublinCore
+   is a XML::Compile::Cache
+   is a XML::Compile::Schema
+   is a XML::Compile
+
+=head1 SYNOPSIS
+
+  my $dc = Data::DublinCore->new(version => '20080211');
+  my $xml  = $dc->writer($sometype)->($doc, $perldata);
+
+  my ($type, $data) = $dc->from('data.xml');
+  my ($type, $data) = Data::DublinCore->from('data.xml');
+  print "Root type: $type\n";
+  print Dumper $data;    # from Data::Dumper
+
+=head1 DESCRIPTION
+
+This module provides access to the DublinCore metadata specification,
+see F<http://dublincore.org>.
+
+Actually, the dublin-core spec is rather empty: applications
+need to define the content of the supplied containers themselves.
+When this content is RDF defined, it seems not to follow the rules
+of schema's at all. And for other applications I do not know. So...
+the best thing this module can do is call L<XML::LibXML::Simple|XML::LibXML::Simple>.
+In the future, however, this may improve.
+
+=head1 METHODS
+
+=head2 Constructors
+
+$obj-E<gt>B<from>(XMLDATA, OPTIONS)
+
+=over 4
+
+Read an XML message, in any format supported by L<XML::Compile> method
+C<dataToXML()>: string, file, filehandle, and more.  Returned is a list
+of two: the type of the top-level element plus the data-structure.
+
+When the method is called as class method, then a temporary instance is
+created. Creating an instance is (very) slow: reuse is advised.
+
+  my $dc            = Data::DublinCore->new;
+  my ($type, $data) = $dc->from('data.xml');
+
+or
+
+  my ($type, $data) = Data::DublinCore->from('data.xml');
+
+=back
+
+Data::DublinCore-E<gt>B<new>(OPTIONS)
+
+=over 4
+
+ Option            --Defined in     --Default
+ allow_undeclared    XML::Compile::Cache  <false>
+ any_element         XML::Compile::Cache  'ATTEMPT'
+ any_type                             <call XML::LibXML::Simple>
+ block_namespace     XML::Compile::Schema  []
+ hook                XML::Compile::Schema  undef
+ hooks               XML::Compile::Schema  []
+ ignore_unused_tags  XML::Compile::Schema  <false>
+ key_rewrite         XML::Compile::Schema  []
+ opts_readers        XML::Compile::Cache  []
+ opts_rw             XML::Compile::Cache  []
+ opts_writers        XML::Compile::Cache  []
+ prefixes            XML::Compile::Cache  <smart>
+ schema_dirs         XML::Compile     undef
+ typemap             XML::Compile::Schema  {}
+ version                              <newest>
+
+. allow_undeclared => BOOLEAN
+
+. any_element => CODE|'TAKE_ALL'|'SKIP_ALL'|'ATTEMPT'
+
+. any_type => CODE
+
+=over 4
+
+Passed in the reader to L<XML::Compile::Schema::compile(any_type)|XML::Compile::Schema/"Compilers">.
+Each contained data element which is complex gets passed
+into  XML::LibXML::Simple subroutine XMLin.  This provides easy access
+to for instance rdf data which is stored in there.
+
+=back
+
+. block_namespace => NAMESPACE|TYPE|HASH|CODE|ARRAY
+
+. hook => ARRAY-WITH-HOOKDATA | HOOK
+
+. hooks => ARRAY-OF-HOOK
+
+. ignore_unused_tags => BOOLEAN|REGEXP
+
+. key_rewrite => HASH|CODE|ARRAY-of-HASH-and-CODE
+
+. opts_readers => HASH|ARRAY-of-PAIRS
+
+. opts_rw => HASH|ARRAY-of-PAIRS
+
+. opts_writers => HASH|ARRAY-of-PAIRS
+
+. prefixes => HASH|ARRAY-of-PAIRS
+
+. schema_dirs => DIRECTORY|ARRAY-OF-DIRECTORIES
+
+. typemap => HASH
+
+. version => STRING
+
+=back
+
+=head2 Accessors
+
+$obj-E<gt>B<addHook>(HOOKDATA|HOOK|undef)
+
+=over 4
+
+See L<XML::Compile::Schema/"Accessors">
+
+=back
+
+$obj-E<gt>B<addHooks>(HOOK, [HOOK, ...])
+
+=over 4
+
+See L<XML::Compile::Schema/"Accessors">
+
+=back
+
+$obj-E<gt>B<addKeyRewrite>(PREDEF|CODE|HASH, ...)
+
+=over 4
+
+See L<XML::Compile::Schema/"Accessors">
+
+=back
+
+$obj-E<gt>B<addSchemaDirs>(DIRECTORIES|FILENAME)
+
+Data::DublinCore-E<gt>B<addSchemaDirs>(DIRECTORIES|FILENAME)
+
+=over 4
+
+See L<XML::Compile/"Accessors">
+
+=back
+
+$obj-E<gt>B<addSchemas>(XML, OPTIONS)
+
+=over 4
+
+See L<XML::Compile::Schema/"Accessors">
+
+=back
+
+$obj-E<gt>B<addTypemap>(PAIR)
+
+=over 4
+
+See L<XML::Compile::Schema/"Accessors">
+
+=back
+
+$obj-E<gt>B<addTypemaps>(PAIRS)
+
+=over 4
+
+See L<XML::Compile::Schema/"Accessors">
+
+=back
+
+$obj-E<gt>B<allowUndeclared>([BOOLEAN])
+
+=over 4
+
+See L<XML::Compile::Cache/"Accessors">
+
+=back
+
+$obj-E<gt>B<blockNamespace>(NAMESPACE|TYPE|HASH|CODE|ARRAY)
+
+=over 4
+
+See L<XML::Compile::Schema/"Accessors">
+
+=back
+
+$obj-E<gt>B<hooks>
+
+=over 4
+
+See L<XML::Compile::Schema/"Accessors">
+
+=back
+
+$obj-E<gt>B<namespace>
+
+=over 4
+
+=back
+
+$obj-E<gt>B<prefix>(PREFIX)
+
+=over 4
+
+See L<XML::Compile::Cache/"Accessors">
+
+=back
+
+$obj-E<gt>B<prefixFor>(URI)
+
+=over 4
+
+See L<XML::Compile::Cache/"Accessors">
+
+=back
+
+$obj-E<gt>B<prefixed>(TYPE)
+
+=over 4
+
+See L<XML::Compile::Cache/"Accessors">
+
+=back
+
+$obj-E<gt>B<prefixes>([PAIRS|ARRAY|HASH])
+
+=over 4
+
+See L<XML::Compile::Cache/"Accessors">
+
+=back
+
+$obj-E<gt>B<useSchema>(SCHEMA, [SCHEMA])
+
+=over 4
+
+See L<XML::Compile::Schema/"Accessors">
+
+=back
+
+$obj-E<gt>B<version>
+
+=over 4
+
+=back
+
+=head2 Compilers
+
+$obj-E<gt>B<compile>(('READER'|'WRITER'), TYPE, OPTIONS)
+
+=over 4
+
+See L<XML::Compile::Schema/"Compilers">
+
+=back
+
+$obj-E<gt>B<compileAll>(['READER'|'WRITER'|'RW', [NAMESPACE]])
+
+=over 4
+
+See L<XML::Compile::Cache/"Compilers">
+
+=back
+
+Data::DublinCore-E<gt>B<dataToXML>(NODE|REF-XML-STRING|XML-STRING|FILENAME|FILEHANDLE|KNOWN)
+
+=over 4
+
+See L<XML::Compile/"Compilers">
+
+=back
+
+$obj-E<gt>B<reader>(TYPE|NAME, OPTIONS)
+
+=over 4
+
+See L<XML::Compile::Cache/"Compilers">
+
+=back
+
+$obj-E<gt>B<template>('XML'|'PERL', TYPE, OPTIONS)
+
+=over 4
+
+See L<XML::Compile::Schema/"Compilers">
+
+=back
+
+$obj-E<gt>B<writer>(TYPE|NAME)
+
+=over 4
+
+See L<XML::Compile::Cache/"Compilers">
+
+=back
+
+=head2 Administration
+
+$obj-E<gt>B<declare>('READER'|'WRITER'|'RW', TYPE|ARRAY-of-TYPES, OPTIONS)
+
+=over 4
+
+See L<XML::Compile::Cache/"Administration">
+
+=back
+
+$obj-E<gt>B<elements>
+
+=over 4
+
+See L<XML::Compile::Schema/"Administration">
+
+=back
+
+$obj-E<gt>B<findName>(NAME)
+
+=over 4
+
+See L<XML::Compile::Cache/"Administration">
+
+=back
+
+$obj-E<gt>B<findSchemaFile>(FILENAME)
+
+Data::DublinCore-E<gt>B<findSchemaFile>(FILENAME)
+
+=over 4
+
+See L<XML::Compile/"Administration">
+
+=back
+
+$obj-E<gt>B<importDefinitions>(XMLDATA, OPTIONS)
+
+=over 4
+
+See L<XML::Compile::Schema/"Administration">
+
+=back
+
+$obj-E<gt>B<knownNamespace>(NAMESPACE|PAIRS)
+
+Data::DublinCore-E<gt>B<knownNamespace>(NAMESPACE|PAIRS)
+
+=over 4
+
+See L<XML::Compile/"Administration">
+
+=back
+
+$obj-E<gt>B<namespaces>
+
+=over 4
+
+See L<XML::Compile::Schema/"Administration">
+
+=back
+
+$obj-E<gt>B<printIndex>([FILEHANDLE], OPTIONS)
+
+=over 4
+
+See L<XML::Compile::Cache/"Administration">
+
+=back
+
+$obj-E<gt>B<types>
+
+=over 4
+
+See L<XML::Compile::Schema/"Administration">
+
+=back
+
+$obj-E<gt>B<walkTree>(NODE, CODE)
+
+=over 4
+
+See L<XML::Compile/"Administration">
+
+=back
+
+=head1 DETAILS
+
+=head1 DIAGNOSTICS
+
+Error: cannot find pre-installed name-space files
+
+=over 4
+
+Use C<$ENV{SCHEMA_LOCATION}> or L<new(schema_dirs)|XML::Compile/"Constructors"> to express location
+of installed name-space files, which came with the L<XML::Compile|XML::Compile>
+distribution package.
+
+=back
+
+Error: don't known how to interpret XML data
+
+=over 4
+
+=back
+
+=head1 SEE ALSO
+
+This module is part of Data-DublinCore distribution version 0.01,
+built on June 22, 2009. Website: F<http://perl.overmeer.net>
+
+=head1 COPYRIGHTS
+
+Copyrights of the perl code and the related documentation by
+2009 by Mark Overmeer. For other contributors see ChangeLog.
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+See F<http://www.perl.com/perl/misc/Artistic.html>
+
