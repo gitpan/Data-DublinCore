@@ -1,5 +1,8 @@
 
 ======== version history of Data::DublinCore
 
-version 0.01:
+version 0.02: Thu Jan 14 13:22:35 CET 2010
+	- fix tests
+
+version 0.01: Mon Jun 22 12:08:57 CEST 2009
 	- initial

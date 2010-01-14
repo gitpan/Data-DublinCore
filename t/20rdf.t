@@ -18,7 +18,7 @@ $Data::Dumper::Indent    = 1;
 $Data::Dumper::Quotekeys = 0;
 $Data::Dumper::Sortkeys  = 1;
 
-my @examples = map { glob $_ } qw(examples/rdf* ../examples/rdf*);
+my @examples = map { glob $_ } qw(examples/rdf*);
 my $rdf_ns   = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
 my $rdf_top  = pack_type $rdf_ns, 'RDF';
 
@@ -29,7 +29,7 @@ my $schemans = SCHEMA2001;
 @examples
    or plan skip_all => 'cannot find examples';
 
-plan tests => 14;
+plan tests => 8;
 
 my $dc = Data::DublinCore->new;
 isa_ok($dc, 'Data::DublinCore');

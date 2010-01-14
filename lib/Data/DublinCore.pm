@@ -1,4 +1,4 @@
-# Copyrights 2009 by Mark Overmeer.
+# Copyrights 2009-2010 by Mark Overmeer.
 #  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
 # Pod stripped from pm file by OODoc 1.06.
@@ -7,7 +7,7 @@ use strict;
 
 package Data::DublinCore;
 use vars '$VERSION';
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 use base 'XML::Compile::Cache';
 our $VERSION = '0.01';
