@@ -1,6 +1,11 @@
 
 ======== version history of Data::DublinCore
 
+version 0.03: Fri Jun 11 10:22:19 CEST 2010
+	- fix tests for newer versions of XML::Compile (>1.10), which
+	  do prefix namespaced attributes for the HASH key.
+	  [cpantesters]
+
 version 0.02: Thu Jan 14 13:22:35 CET 2010
 	- fix tests
 

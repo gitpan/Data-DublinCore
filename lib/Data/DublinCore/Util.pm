@@ -7,7 +7,7 @@ use strict;
 
 package Data::DublinCore::Util;
 use vars '$VERSION';
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 use base 'Exporter';
 

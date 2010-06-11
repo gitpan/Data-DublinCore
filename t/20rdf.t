@@ -73,13 +73,14 @@ _FAKE_RDF
 
 my %expected =
  ( 'rdf1.xml' => { rdf_Description =>
-     [ { about => 'http://media.example.com/audio/guide.ra', dc_any => [
+     [ { rdf_about => 'http://media.example.com/audio/guide.ra', dc_any => [
         { dc_creator => 'Rose Bush' },
         { dc_title => 'A Guide to Growing Roses' },
         { dc_description => 'Describes process for planting and nurturing different kinds of rose bushes.' },
         { dc_date => '2001-01-20' } ] } ] }
 
- , 'rdf2.xml' => { rdf_Description => [ { about => 'http://example.org/'
+ , 'rdf2.xml' => { rdf_Description => [
+        { rdf_about => 'http://example.org/'
         , dc_any => [ { dc_source => '' } ] },
     { dc_any => [
         { dc_title => 'Internet Ethics' },
@@ -91,14 +92,14 @@ my %expected =
         { dc_description => 'A painting by ...' } ] } ] }
 
  , 'rdf3.xml' => { rdf_Description =>
-     [ { about => 'http://www.ilrt.bristol.ac.uk/people/cmdjb/', dc_any => [
+     [ { rdf_about => 'http://www.ilrt.bristol.ac.uk/people/cmdjb/', dc_any => [
         { dc_title => 'Dave Beckett\'s Home Page' },
         { dc_creator => 'Dave Beckett' },
         { dc_publisher => 'ILRT, University of Bristol' },
         { dc_date => '2002-07-31' } ] } ] }
 
  , 'rdf4.xml' => {
-  rdf_Description => [ { about => 'http://dublincore.org/', dc_any =>
+  rdf_Description => [ { rdf_about => 'http://dublincore.org/', dc_any =>
       [ { dc_title => 'Dublin Core Metadata Initiative - Home Page' },
         { dc_description => 'The Dublin Core Metadata Initiative Web site.' },
         { dc_date => '2001-01-16' },

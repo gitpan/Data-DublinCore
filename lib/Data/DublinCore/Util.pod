@@ -24,8 +24,8 @@ You may also need C<XMLNS> or C<SHEMA2001> from L<XML::Compile::Util|XML::Compil
 
 =head1 SEE ALSO
 
-This module is part of Data-DublinCore distribution version 0.02,
-built on January 14, 2010. Website: F<http://perl.overmeer.net>
+This module is part of Data-DublinCore distribution version 0.03,
+built on June 11, 2010. Website: F<http://perl.overmeer.net>
 
 =head1 COPYRIGHTS
 

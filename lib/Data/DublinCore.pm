@@ -7,7 +7,7 @@ use strict;
 
 package Data::DublinCore;
 use vars '$VERSION';
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 use base 'XML::Compile::Cache';
 our $VERSION = '0.01';

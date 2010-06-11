@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                Data-DublinCore
-version:             0.02
+version:             0.03
 abstract:            DublinCore XML schemas
 license:             perl
 author:              
@@ -11,7 +11,7 @@ requires:
     Log::Report:                   0.23
     Test::More:                    0.54
     Test::Pod:                     1.00
-    XML::Compile:                  1.07
+    XML::Compile:                  1.10
     XML::Compile::Cache:           0.92
     XML::LibXML::Simple:           0.13
 meta-spec:
