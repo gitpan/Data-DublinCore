@@ -395,8 +395,8 @@ See L<XML::Compile/"Administration">
 
 =head1 SEE ALSO
 
-This module is part of Data-DublinCore distribution version 0.03,
-built on June 11, 2010. Website: F<http://perl.overmeer.net>
+This module is part of Data-DublinCore distribution version 0.04,
+built on June 14, 2010. Website: F<http://perl.overmeer.net>
 
 =head1 COPYRIGHTS
 

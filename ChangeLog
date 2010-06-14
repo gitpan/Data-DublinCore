@@ -1,6 +1,10 @@
 
 ======== version history of Data::DublinCore
 
+version 0.04: Mon Jun 14 09:19:50 CEST 2010
+	- avoid memory leak via any_type handler
+	- require newer version of XML::COmpile
+
 version 0.03: Fri Jun 11 10:22:19 CEST 2010
 	- fix tests for newer versions of XML::Compile (>1.10), which
 	  do prefix namespaced attributes for the HASH key.

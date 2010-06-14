@@ -7,7 +7,7 @@ use strict;
 
 package Data::DublinCore;
 use vars '$VERSION';
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 use base 'XML::Compile::Cache';
 our $VERSION = '0.01';
@@ -16,6 +16,7 @@ use Log::Report 'data-dublincore', syntax => 'SHORT';
 
 use XML::Compile::Util  qw/type_of_node unpack_type pack_type SCHEMA2001/;
 use XML::LibXML::Simple qw/XMLin/;
+use Scalar::Util        qw/weaken/;
 
 
 use Data::DublinCore::Util;
@@ -57,7 +58,10 @@ sub init($)
     my $r = $args->{opts_readers};
     $r = @$r if ref $r eq 'ARRAY';
     $r->{mixed_elements}  = 'XML_NODE';
-    $r->{any_type}        = sub { $self->_handle_any_type(@_) };
+
+    my $s = $self; weaken $s;   # avoid memory leak
+    $r->{any_type}        = sub { $s->_handle_any_type(@_) };
+
     $args->{opts_readers} = $r;
 
     $args->{any_element} ||= 'ATTEMPT';

@@ -4,9 +4,9 @@ use 5.008;
 
 WriteMakefile
  ( NAME	 	=> 'Data::DublinCore'
- , VERSION     	=> '0.03'
+ , VERSION     	=> '0.04'
  , PREREQ_PM    =>
-   { XML::Compile         => '1.10'
+   { XML::Compile         => '1.15'
    , XML::Compile::Cache  => '0.92'
    , XML::LibXML::Simple  => '0.13'
    , Log::Report          => '0.23'
